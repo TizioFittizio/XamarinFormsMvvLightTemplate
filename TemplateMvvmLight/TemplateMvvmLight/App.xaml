@@ -10,6 +10,16 @@
 
         <!-- Application resource dictionary -->
         <ResourceDictionary>
+            
+            <!-- Colors -->
+            <Color x:Key="PrimaryColor">#8BC34A</Color>
+            <Color x:Key="AccentColor">#CDDC39</Color>
+            <Color x:Key="PrimaryText">#212121</Color>
+            <Color x:Key="SecondaryText">#757575</Color>
+            <Color x:Key="DividerColor">#BDBDBD</Color>
+            <Color x:Key="IconsColor">#212121</Color>
+            <Color x:Key="LightColor">#DCEDC8</Color>
+            <Color x:Key="DarkColor">#689F38</Color>
 
             <!-- ViewModelLocator -->
             <vm:ViewModelLocator x:Key="Locator" />

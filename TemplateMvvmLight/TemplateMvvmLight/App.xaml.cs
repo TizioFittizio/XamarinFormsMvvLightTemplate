@@ -1,10 +1,4 @@
-﻿/// Mohamed Ali NOUIRA
-/// http://www.sweetmit.com
-/// http://www.mohamedalinouira.com
-/// https://github.com/medalinouira
-/// Copyright © Mohamed Ali NOUIRA. All rights reserved.
-
-using System.Reflection;
+﻿using System.Reflection;
 using System.Globalization;
 
 using Xamarin.Forms;
@@ -27,10 +21,10 @@ namespace TemplateMvvmLight
             TranslateExtension.InitTranslateExtension("AppResources.Localization.Resources", CultureInfo.CurrentCulture, typeof(App).GetTypeInfo().Assembly);
             #endregion
 
-            NavigationPage navigationPage = new NavigationPage(new HomeView());
-            navigationPage.BarBackgroundColor = Color.FromHex("#7E1335");
-            navigationPage.BarTextColor = Color.White;
-            MainPage = navigationPage;
+            /* NavigationPage navigationPage = new NavigationPage(new LoginView());
+            navigationPage.BarBackgroundColor = Color.FromHex("#8BC34A");
+            navigationPage.BarTextColor = Color.White; */
+            MainPage = new LoginView();
         }
 
 		protected override void OnStart ()

@@ -126,4 +126,16 @@
   <data name="HOME_TITLE" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="LOGIN_PASSWORD_TEXT" xml:space="preserve">
+    <value>Password:</value>
+    <comment>Label per entry della password nella login</comment>
+  </data>
+  <data name="LOGIN_SUBMIT_TEXT" xml:space="preserve">
+    <value>Accedi</value>
+    <comment>Bottone della submit nella login</comment>
+  </data>
+  <data name="LOGIN_USERNAME_TEXT" xml:space="preserve">
+    <value>Login:</value>
+    <comment>Label per entry dell' username nella login</comment>
+  </data>
 </root>
