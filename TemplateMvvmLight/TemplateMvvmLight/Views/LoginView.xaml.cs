@@ -16,5 +16,10 @@ namespace TemplateMvvmLight.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void Entry_Completed()
+        {
+
+        }
+    }
 }

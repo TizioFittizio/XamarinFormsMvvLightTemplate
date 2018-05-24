@@ -71,6 +71,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="IViewModels\ILoginViewModel.cs" />
+    <None Remove="ViewModels\LoginViewModel.cs" />
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\LoginView.xaml.cs" />
   </ItemGroup>

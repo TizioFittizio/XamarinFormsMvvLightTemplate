@@ -10,8 +10,11 @@
 
         <!-- Application resource dictionary -->
         <ResourceDictionary>
+
+            <!-- https://www.materialpalette.com/light-green/lime -->
             
             <!-- Colors -->
+            <!-- Per android, questi colori sono presenti anche nello styles.xml -->
             <Color x:Key="PrimaryColor">#8BC34A</Color>
             <Color x:Key="AccentColor">#CDDC39</Color>
             <Color x:Key="PrimaryText">#212121</Color>
@@ -26,6 +29,11 @@
 
             <!-- Converters -->
             <c:SelectedItemConverter x:Key="SelectedItemConverter"/>
+
+            <Style x:Key="BtnPrimary" TargetType="Button">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="#8BC34A"/>
+            </Style>
 
             <Style x:Key="BtnGray" TargetType="Button">
                 <Setter Property="TextColor" Value="White"/>

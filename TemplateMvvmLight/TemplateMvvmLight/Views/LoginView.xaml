@@ -2,41 +2,36 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ex="clr-namespace:Xamarin.Forms.ToolKit.Extensions;assembly=Xamarin.Forms.ToolKit.Extensions"
+             BindingContext="{Binding Login, Source={StaticResource Locator}}"
              x:Class="TemplateMvvmLight.Views.LoginView">
     <ContentPage.Content>
-        <Grid
-            Padding="40, 18, 40, 40"
-                HeightRequest="0"
+        <StackLayout
+            Padding="40, 18, 40, 0"
+            VerticalOptions="End"
             >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" /> <!-- In caso di logo considerare l'utilizzo di auto -->
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Text="{ex:Translate Key=LOGIN_USERNAME_TEXT}" Grid.Row="1" Grid.Column="0"/>
-            <Entry Grid.Row="2" Grid.Column="0"/>
-            <Label Text="{ex:Translate Key=LOGIN_PASSWORD_TEXT}" Grid.Row="3" Grid.Column="0"/>
-            <Entry Grid.Row="4" Grid.Column="0"/>
-            <Button Text="{ex:Translate Key=LOGIN_SUBMIT_TEXT}" Grid.Row="5" Grid.Column="0"/>
-            <!-- <StackLayout
-                    BackgroundColor="Red"
-                AbsoluteLayout.LayoutBounds="0, 0, 1, 0.33"
-                AbsoluteLayout.LayoutFlags="All"
-                Spacing="5"
-                >
-                <Label Text="{ex:Translate Key=LOGIN_USERNAME_TEXT}"/>
-                <Entry />
-                <Label Text="{ex:Translate Key=LOGIN_PASSWORD_TEXT}"/>
-                <Entry />
-                <Button Text="{ex:Translate Key=LOGIN_SUBMIT_TEXT}"/>
-            </StackLayout> -->
-        </Grid>
+            <Entry
+                Placeholder="{ex:Translate Key=LOGIN_USERNAME_TEXT}"
+                Text="{Binding Path=Login, Mode=TwoWay}"
+                Completed="Login_Completed"
+                x:Name="LoginEntry"
+            />
+            <Entry
+                Placeholder="{ex:Translate Key=LOGIN_PASSWORD_TEXT}"
+                Text="{Binding Path=Password, Mode=TwoWay}"
+                Completed="Password_Completed"
+                x:Name="PasswordEntry"
+            />
+            <Button 
+                Text="{ex:Translate Key=LOGIN_SUBMIT_TEXT}" 
+                Style="{StaticResource BtnPrimary}"
+                IsEnabled="{Binding Path=CanSubmit, Mode=OneWay}"
+                x:Name="SubmitButton"
+            />
+            <ActivityIndicator
+                IsRunning="True"
+                IsVisible="True"
+            />
+        </StackLayout>
 
 
 

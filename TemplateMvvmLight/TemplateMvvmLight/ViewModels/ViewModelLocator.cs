@@ -1,10 +1,4 @@
-﻿/// Mohamed Ali NOUIRA
-/// http://www.sweetmit.com
-/// http://www.mohamedalinouira.com
-/// https://github.com/medalinouira
-/// Copyright © Mohamed Ali NOUIRA. All rights reserved.
-
-using TemplateMvvmLight.Services;
+﻿using TemplateMvvmLight.Services;
 using Xamarin.Forms.Popups;
 using CommonServiceLocator;
 using TemplateMvvmLight.IServices;
@@ -24,6 +18,7 @@ namespace TemplateMvvmLight.ViewModels
 
             SimpleIoc.Default.Register<IHomeViewModel, HomeViewModel>();
             SimpleIoc.Default.Register<IDetailsViewModel, DetailsViewModel>();
+            SimpleIoc.Default.Register<ILoginViewModel, LoginViewModel>();
 
             SimpleIoc.Default.Register<IUserServices, UserServices>();
             SimpleIoc.Default.Register<IPopupsService, PopupsService>();
@@ -43,6 +38,14 @@ namespace TemplateMvvmLight.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<IDetailsViewModel>();
+            }
+        }
+
+        public ILoginViewModel Login
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ILoginViewModel>();
             }
         }
     }
