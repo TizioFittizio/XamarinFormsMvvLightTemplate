@@ -17,8 +17,10 @@ namespace TemplateMvvmLight.Views
 			InitializeComponent ();
 		}
 
-        private void Entry_Completed()
+        private async void Login_Completed(object sender, EventArgs e)
         {
+            await Task.Delay(100);
+            PasswordEntry.Focus();
 
         }
     }

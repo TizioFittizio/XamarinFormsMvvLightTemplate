@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using TemplateMvvmLight.IViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Navigation;
+using Xamarin.Forms.Popups;
 
 namespace TemplateMvvmLight.ViewModels
 {
@@ -43,15 +46,43 @@ namespace TemplateMvvmLight.ViewModels
             }
         }
 
-        public LoginViewModel(INavigationService _iNavigationService)
+        private bool _isAccessing;
+        public bool IsAccessing
         {
-            this._iNavigationService = _iNavigationService;
-            this.CanSubmit = false;
+            get { return _isAccessing; }
+            set
+            {
+                _isAccessing = value;
+                OnPropertyChanged(nameof(IsAccessing));
+            }
         }
 
+        public ICommand AccessCommand { get; set; }
+
+        public LoginViewModel(INavigationService _iNavigationService, IPopupsService _iPopupsService)
+        {
+            this._iNavigationService = _iNavigationService;
+            this._iPopupsService = _iPopupsService;
+            CanSubmit = false;
+            IsAccessing = false;
+            AccessCommand = new Command(Access);
+        }
+
+        /// <summary>
+        /// Abilita(disabilita il pulsante per il submit in base alle credenziali inserite
+        /// </summary>
         private void UpdateCanSubmit()
         {
             CanSubmit = !String.IsNullOrEmpty(this.Login) && !String.IsNullOrEmpty(this.Password);
+        }
+
+        /// <summary>
+        /// Prova ad effettuare l'accesso con le credenziali date
+        /// </summary>
+        private async void Access()
+        {
+            IsAccessing = true;
+            // await this._iPopupsService.DisplayAlert("Attenzione!", "Occhio!", "Ok!");
         }
     }
 }

@@ -2,34 +2,40 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ex="clr-namespace:Xamarin.Forms.ToolKit.Extensions;assembly=Xamarin.Forms.ToolKit.Extensions"
+             xmlns:Converters="clr-namespace:TemplateMvvmLight.Converters"
              BindingContext="{Binding Login, Source={StaticResource Locator}}"
+             
              x:Class="TemplateMvvmLight.Views.LoginView">
     <ContentPage.Content>
         <StackLayout
-            Padding="40, 18, 40, 0"
+            Padding="40, 18, 40, 40"
             VerticalOptions="End"
             >
             <Entry
                 Placeholder="{ex:Translate Key=LOGIN_USERNAME_TEXT}"
                 Text="{Binding Path=Login, Mode=TwoWay}"
+                Keyboard="Email"
                 Completed="Login_Completed"
-                x:Name="LoginEntry"
+                IsEnabled="{Binding IsAccessing, Converter={Converters:NegateBoolCoverter}}"
             />
             <Entry
                 Placeholder="{ex:Translate Key=LOGIN_PASSWORD_TEXT}"
                 Text="{Binding Path=Password, Mode=TwoWay}"
-                Completed="Password_Completed"
                 x:Name="PasswordEntry"
+                IsPassword="True"
+                IsEnabled="{Binding IsAccessing, Converter={Converters:NegateBoolCoverter}}"
             />
+            <!-- https://bugzilla.xamarin.com/show_bug.cgi?id=32899 -->
             <Button 
                 Text="{ex:Translate Key=LOGIN_SUBMIT_TEXT}" 
                 Style="{StaticResource BtnPrimary}"
-                IsEnabled="{Binding Path=CanSubmit, Mode=OneWay}"
-                x:Name="SubmitButton"
+                Command="{Binding AccessCommand}" 
+                IsEnabled="{Binding CanSubmit}"
+                IsVisible="{Binding IsAccessing, Converter={Converters:NegateBoolCoverter}}"
             />
             <ActivityIndicator
                 IsRunning="True"
-                IsVisible="True"
+                IsVisible="{Binding Path=IsAccessing}"
             />
         </StackLayout>
 
@@ -37,3 +43,5 @@
 
     </ContentPage.Content>
 </ContentPage>
+    
+    <!--  -->

@@ -71,6 +71,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Converters\NegateBooleanConverter.cs" />
     <None Remove="IViewModels\ILoginViewModel.cs" />
     <None Remove="ViewModels\LoginViewModel.cs" />
     <None Remove="Views\LoginView.xaml" />
