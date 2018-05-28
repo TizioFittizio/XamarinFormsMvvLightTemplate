@@ -53,6 +53,7 @@
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
     <PackageReference Include="Xamarin.Forms.Navigation" Version="1.0.1" />
     <PackageReference Include="Xamarin.Forms.Popups" Version="1.0.0" />
@@ -72,7 +73,9 @@
 
   <ItemGroup>
     <None Remove="Converters\NegateBooleanConverter.cs" />
+    <None Remove="IServices\IConnectivityServices.cs" />
     <None Remove="IViewModels\ILoginViewModel.cs" />
+    <None Remove="Services\ConnectivityServices.cs" />
     <None Remove="ViewModels\LoginViewModel.cs" />
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\LoginView.xaml.cs" />

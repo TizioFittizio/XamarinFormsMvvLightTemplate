@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using TemplateMvvmLight.IServices;
 using TemplateMvvmLight.IViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Navigation;
 using Xamarin.Forms.Popups;
 
@@ -59,10 +61,12 @@ namespace TemplateMvvmLight.ViewModels
 
         public ICommand AccessCommand { get; set; }
 
-        public LoginViewModel(INavigationService _iNavigationService, IPopupsService _iPopupsService)
+        [Preserve]
+        public LoginViewModel(INavigationService _iNavigationService, IPopupsService _iPopupsService, IConnectivityServices _connectivityServices)
         {
             this._iNavigationService = _iNavigationService;
             this._iPopupsService = _iPopupsService;
+            this._iConnectivityServices = _connectivityServices;
             CanSubmit = false;
             IsAccessing = false;
             AccessCommand = new Command(Access);
@@ -82,7 +86,13 @@ namespace TemplateMvvmLight.ViewModels
         private async void Access()
         {
             IsAccessing = true;
-            // await this._iPopupsService.DisplayAlert("Attenzione!", "Occhio!", "Ok!");
+
+            // Controllo della connessione
+            if (!this._iConnectivityServices.HasWebConnection())
+            {
+                IsAccessing = false;
+                await this._iPopupsService.DisplayAlert("Errore di rete", "Controllare la connessione del dispositivo e riprovare", "Ok");
+            }
         }
     }
 }
