@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using TemplateMvvmLight.AppResources.Localization;
+using TemplateMvvmLight.Constants;
 using TemplateMvvmLight.IServices;
 using TemplateMvvmLight.IViewModels;
 using Xamarin.Forms;
@@ -62,18 +64,19 @@ namespace TemplateMvvmLight.ViewModels
         public ICommand AccessCommand { get; set; }
 
         [Preserve]
-        public LoginViewModel(INavigationService _iNavigationService, IPopupsService _iPopupsService, IConnectivityServices _connectivityServices)
+        public LoginViewModel(INavigationService _iNavigationService, IPopupsService _iPopupsService, IConnectivityServices _connectivityServices, IAuthenticationServices _authenticationServices)
         {
             this._iNavigationService = _iNavigationService;
             this._iPopupsService = _iPopupsService;
             this._iConnectivityServices = _connectivityServices;
+            this._iAuthenticationServices = _authenticationServices;
             CanSubmit = false;
             IsAccessing = false;
             AccessCommand = new Command(Access);
         }
 
         /// <summary>
-        /// Abilita(disabilita il pulsante per il submit in base alle credenziali inserite
+        /// Abilita/disabilita il pulsante per il submit in base alle credenziali inserite
         /// </summary>
         private void UpdateCanSubmit()
         {
@@ -91,7 +94,17 @@ namespace TemplateMvvmLight.ViewModels
             if (!this._iConnectivityServices.HasWebConnection())
             {
                 IsAccessing = false;
-                await this._iPopupsService.DisplayAlert("Errore di rete", "Controllare la connessione del dispositivo e riprovare", "Ok");
+                await this._iPopupsService.DisplayAlert(Resources.ERROR_TITLE_NETWORK, Resources.ERROR_NO_CONNECTIVITY, "Ok");
+                return;
+            }
+
+            // Login
+            var loginResponse = await this._iAuthenticationServices.Login(Login, Password);
+            if (loginResponse.Error != null)
+            {
+                IsAccessing = false;
+                string errorMessage = loginResponse.Error == ErrorResponse.AUTHENTICATION_FAILED ? Resources.ERROR_BAD_CREDENTIALS : Resources.ERROR_GENERIC;
+                await this._iPopupsService.DisplayAlert(Resources.ERROR_TITLE_AUTHENTICATION, errorMessage, "Ok");
             }
         }
     }

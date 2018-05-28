@@ -1,11 +1,8 @@
-﻿/// Mohamed Ali NOUIRA
-/// http://www.sweetmit.com
-/// http://www.mohamedalinouira.com
-/// https://github.com/medalinouira
-/// Copyright © Mohamed Ali NOUIRA. All rights reserved.
-
-namespace TemplateMvvmLight.Models
+﻿namespace TemplateMvvmLight.Models
 {
+    /// <summary>
+    /// Model utilizzato per memorizzare l'utente autenticato all' interno dell' app
+    /// </summary>
     public class User
     {
         public string Email { get; set; }

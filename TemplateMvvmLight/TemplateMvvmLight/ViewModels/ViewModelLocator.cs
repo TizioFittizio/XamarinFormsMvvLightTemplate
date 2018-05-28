@@ -24,6 +24,7 @@ namespace TemplateMvvmLight.ViewModels
             SimpleIoc.Default.Register<IPopupsService, PopupsService>();
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<IConnectivityServices, ConnectivityServices>();
+            SimpleIoc.Default.Register<IAuthenticationServices, AuthenticationServices>();
         }
 
         public IHomeViewModel Home

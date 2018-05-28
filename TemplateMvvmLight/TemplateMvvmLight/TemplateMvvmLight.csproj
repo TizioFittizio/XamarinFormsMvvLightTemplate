@@ -45,14 +45,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AppResources\Assets\ic_sample.png" />
     <EmbeddedResource Include="AppResources\Localization\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>  
     
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
     <PackageReference Include="Xamarin.Forms.Navigation" Version="1.0.1" />
@@ -72,9 +74,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Constants\ErrorResponse.cs" />
+    <None Remove="Constants\Urls.cs" />
     <None Remove="Converters\NegateBooleanConverter.cs" />
+    <None Remove="IServices\IAuthenticationServices.cs" />
     <None Remove="IServices\IConnectivityServices.cs" />
     <None Remove="IViewModels\ILoginViewModel.cs" />
+    <None Remove="Models\HttpResponse.cs" />
+    <None Remove="Services\AuthenticationServices.cs" />
     <None Remove="Services\ConnectivityServices.cs" />
     <None Remove="ViewModels\LoginViewModel.cs" />
     <None Remove="Views\LoginView.xaml" />
@@ -82,9 +89,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AppResources\Localization\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AppResources\Localization\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </None>
+    <None Update="AppResources\Localization\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   
 </Project>
