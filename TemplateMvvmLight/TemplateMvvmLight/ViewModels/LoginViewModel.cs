@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -64,12 +65,18 @@ namespace TemplateMvvmLight.ViewModels
         public ICommand AccessCommand { get; set; }
 
         [Preserve]
-        public LoginViewModel(INavigationService _iNavigationService, IPopupsService _iPopupsService, IConnectivityServices _connectivityServices, IAuthenticationServices _authenticationServices)
+        public LoginViewModel(INavigationService _iNavigationService, 
+            IPopupsService _iPopupsService, 
+            IConnectivityServices _connectivityServices, 
+            IAuthenticationServices _authenticationServices,
+            IUserDialogsServices _userDialogsServices
+            )
         {
             this._iNavigationService = _iNavigationService;
             this._iPopupsService = _iPopupsService;
             this._iConnectivityServices = _connectivityServices;
             this._iAuthenticationServices = _authenticationServices;
+            this._iUserDialogsServices = _userDialogsServices;
             CanSubmit = false;
             IsAccessing = false;
             AccessCommand = new Command(Access);
@@ -94,7 +101,7 @@ namespace TemplateMvvmLight.ViewModels
             if (!this._iConnectivityServices.HasWebConnection())
             {
                 IsAccessing = false;
-                await this._iPopupsService.DisplayAlert(Resources.ERROR_TITLE_NETWORK, Resources.ERROR_NO_CONNECTIVITY, "Ok");
+                this._iUserDialogsServices.ShowToast(Resources.ERROR_NO_CONNECTIVITY, ToastType.ERROR);
                 return;
             }
 
@@ -104,8 +111,12 @@ namespace TemplateMvvmLight.ViewModels
             {
                 IsAccessing = false;
                 string errorMessage = loginResponse.Error == ErrorResponse.AUTHENTICATION_FAILED ? Resources.ERROR_BAD_CREDENTIALS : Resources.ERROR_GENERIC;
-                await this._iPopupsService.DisplayAlert(Resources.ERROR_TITLE_AUTHENTICATION, errorMessage, "Ok");
+                this._iUserDialogsServices.ShowToast(errorMessage, ToastType.ERROR);
+                return;
             }
+
+            var userAuthenticated = loginResponse.Result;
+            this._iUserDialogsServices.ShowToast("Buon giorno " + userAuthenticated.Username, ToastType.SUCCESS);
         }
     }
 }

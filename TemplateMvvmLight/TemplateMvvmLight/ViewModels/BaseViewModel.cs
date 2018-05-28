@@ -14,6 +14,7 @@ namespace TemplateMvvmLight.ViewModels
         protected INavigationService _iNavigationService;
         protected IConnectivityServices _iConnectivityServices;
         protected IAuthenticationServices _iAuthenticationServices;
+        protected IUserDialogsServices _iUserDialogsServices;
 
         private User _user;
         public User User

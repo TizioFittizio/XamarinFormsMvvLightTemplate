@@ -24,6 +24,7 @@ namespace TemplateMvvmLight.Services
             try
             {
                 HttpClient client = new HttpClient();
+                client.Timeout = new TimeSpan(0, 0, 10);
                 BodyLogin body = new BodyLogin
                 {
                     username = username,
