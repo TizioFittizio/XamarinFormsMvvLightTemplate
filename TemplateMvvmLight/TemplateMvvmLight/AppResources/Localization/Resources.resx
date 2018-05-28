@@ -150,6 +150,10 @@
   <data name="HOME_TITLE" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="LOADING_AUTHENTICATION" xml:space="preserve">
+    <value>Autenticazione in corso</value>
+    <comment>Testo visualizzato durante l'autenticazione</comment>
+  </data>
   <data name="LOGIN_PASSWORD_TEXT" xml:space="preserve">
     <value>Password</value>
     <comment>Label per entry della password nella login</comment>

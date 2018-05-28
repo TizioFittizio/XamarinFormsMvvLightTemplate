@@ -9,6 +9,7 @@ namespace TemplateMvvmLight.Services
 {
     class UserDialogsServices : IUserDialogsServices
     {
+
         public void ShowToast(string text, ToastType toastType = ToastType.NORMAL, int duration = 3000)
         {
             var toastConfig = new ToastConfig(text);
@@ -23,6 +24,16 @@ namespace TemplateMvvmLight.Services
                     break;
             }
             UserDialogs.Instance.Toast(toastConfig);
+        }
+
+        public void ShowLoading(string text)
+        {
+            UserDialogs.Instance.ShowLoading(text, MaskType.Gradient);
+        }
+
+        public void HideLoading()
+        {
+            UserDialogs.Instance.HideLoading();
         }
     }
 }

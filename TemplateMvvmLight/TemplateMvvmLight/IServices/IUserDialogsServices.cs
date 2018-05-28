@@ -9,5 +9,9 @@ namespace TemplateMvvmLight.IServices
     {
 
         void ShowToast(string text, ToastType toastType = ToastType.NORMAL, int duration = 3000);
+
+        void ShowLoading(string text);
+
+        void HideLoading();
     }
 }

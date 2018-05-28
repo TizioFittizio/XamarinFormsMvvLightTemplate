@@ -58,6 +58,14 @@ namespace TemplateMvvmLight.ViewModels
             set
             {
                 _isAccessing = value;
+                if (_isAccessing)
+                {
+                    this._iUserDialogsServices.ShowLoading("Autenticazione in corso");
+                }
+                else
+                {
+                    this._iUserDialogsServices.HideLoading();
+                }
                 OnPropertyChanged(nameof(IsAccessing));
             }
         }
@@ -96,7 +104,7 @@ namespace TemplateMvvmLight.ViewModels
         private async void Access()
         {
             IsAccessing = true;
-
+            
             // Controllo della connessione
             if (!this._iConnectivityServices.HasWebConnection())
             {
@@ -117,6 +125,7 @@ namespace TemplateMvvmLight.ViewModels
 
             var userAuthenticated = loginResponse.Result;
             this._iUserDialogsServices.ShowToast("Buon giorno " + userAuthenticated.Username, ToastType.SUCCESS);
+            IsAccessing = false;
         }
     }
 }

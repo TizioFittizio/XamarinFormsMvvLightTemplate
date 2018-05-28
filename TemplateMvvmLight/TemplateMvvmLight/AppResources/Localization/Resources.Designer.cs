@@ -142,6 +142,15 @@ namespace TemplateMvvmLight.AppResources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Autenticazione in corso.
+        /// </summary>
+        public static string LOADING_AUTHENTICATION {
+            get {
+                return ResourceManager.GetString("LOADING_AUTHENTICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string LOGIN_PASSWORD_TEXT {

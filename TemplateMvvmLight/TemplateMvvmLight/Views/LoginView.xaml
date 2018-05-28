@@ -31,11 +31,6 @@
                 Style="{StaticResource BtnPrimary}"
                 Command="{Binding AccessCommand}" 
                 IsEnabled="{Binding CanSubmit}"
-                IsVisible="{Binding IsAccessing, Converter={Converters:NegateBoolCoverter}}"
-            />
-            <ActivityIndicator
-                IsRunning="True"
-                IsVisible="{Binding Path=IsAccessing}"
             />
         </StackLayout>
 
