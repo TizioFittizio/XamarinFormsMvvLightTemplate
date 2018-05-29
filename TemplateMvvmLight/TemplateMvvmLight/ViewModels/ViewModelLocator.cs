@@ -26,6 +26,7 @@ namespace TemplateMvvmLight.ViewModels
             SimpleIoc.Default.Register<IConnectivityServices, ConnectivityServices>();
             SimpleIoc.Default.Register<IAuthenticationServices, AuthenticationServices>();
             SimpleIoc.Default.Register<IUserDialogsServices, UserDialogsServices>();
+            SimpleIoc.Default.Register<IStorageServices, StorageServices>();
         }
 
         public IHomeViewModel Home

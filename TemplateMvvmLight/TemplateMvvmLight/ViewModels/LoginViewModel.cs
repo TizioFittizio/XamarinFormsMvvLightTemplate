@@ -7,6 +7,8 @@ using TemplateMvvmLight.AppResources.Localization;
 using TemplateMvvmLight.Constants;
 using TemplateMvvmLight.IServices;
 using TemplateMvvmLight.IViewModels;
+using TemplateMvvmLight.Models;
+using TemplateMvvmLight.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Navigation;
@@ -71,23 +73,39 @@ namespace TemplateMvvmLight.ViewModels
         }
 
         public ICommand AccessCommand { get; set; }
+        public ICommand CheckIsLoggedCommand { get; set; }
 
         [Preserve]
-        public LoginViewModel(INavigationService _iNavigationService, 
-            IPopupsService _iPopupsService, 
+        public LoginViewModel(INavigationService _iNavigationService,
             IConnectivityServices _connectivityServices, 
             IAuthenticationServices _authenticationServices,
-            IUserDialogsServices _userDialogsServices
+            IUserDialogsServices _userDialogsServices,
+            IStorageServices _storageServices
             )
         {
             this._iNavigationService = _iNavigationService;
-            this._iPopupsService = _iPopupsService;
             this._iConnectivityServices = _connectivityServices;
             this._iAuthenticationServices = _authenticationServices;
             this._iUserDialogsServices = _userDialogsServices;
+            this._iStorageServices = _storageServices;
+
             CanSubmit = false;
             IsAccessing = false;
             AccessCommand = new Command(Access);
+            CheckIsLoggedCommand = new Command(CheckIsLogged);
+        }
+
+        /// <summary>
+        /// Controlla se è già presente un utente autenticato, in quel caso, verrà reindirizzato alla pagina di home
+        /// </summary>
+        private void CheckIsLogged()
+        {
+            User user = this._iStorageServices.GetObject<User>(StorageKey.USER_AUTHENTICATED);
+            if (user != null)
+            {
+                NavigationPage home = new NavigationPage(new HomeView());
+                Application.Current.MainPage = home;
+            }
         }
 
         /// <summary>
@@ -123,8 +141,11 @@ namespace TemplateMvvmLight.ViewModels
                 return;
             }
 
-            var userAuthenticated = loginResponse.Result;
+            User userAuthenticated = loginResponse.Result;
             this._iUserDialogsServices.ShowToast("Buon giorno " + userAuthenticated.Username, ToastType.SUCCESS);
+
+            await this._iStorageServices.SetObject(StorageKey.USER_AUTHENTICATED, userAuthenticated);
+
             IsAccessing = false;
         }
     }

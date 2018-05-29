@@ -76,16 +76,19 @@
 
   <ItemGroup>
     <None Remove="Constants\ErrorResponse.cs" />
+    <None Remove="Constants\StorageKey.cs" />
     <None Remove="Constants\ToastType.cs" />
     <None Remove="Constants\Urls.cs" />
     <None Remove="Converters\NegateBooleanConverter.cs" />
     <None Remove="IServices\IAuthenticationServices.cs" />
     <None Remove="IServices\IConnectivityServices.cs" />
+    <None Remove="IServices\IStorageServices.cs" />
     <None Remove="IServices\IUserDialogsServices.cs" />
     <None Remove="IViewModels\ILoginViewModel.cs" />
     <None Remove="Models\HttpResponse.cs" />
     <None Remove="Services\AuthenticationServices.cs" />
     <None Remove="Services\ConnectivityServices.cs" />
+    <None Remove="Services\StorageServices.cs" />
     <None Remove="Services\UserDialogsServices.cs" />
     <None Remove="ViewModels\LoginViewModel.cs" />
     <None Remove="Views\LoginView.xaml" />
